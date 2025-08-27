@@ -1,23 +1,12 @@
 import { useState } from "react";
-import { supabase } from "./supabaseClient"; // חיבור ל-Supabase
 
 export default function ChatBot() {
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "שלום 👋 איך אפשר לעזור?" },
+    { role: "assistant", content: "שלום 👋 אני הבוט של S'ean Apps. איך אפשר לעזור לך היום?" },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // פונקציה לשמירת הודעה ב-Supabase
-  async function saveMessage(role, content) {
-    try {
-      await supabase.from("chat_messages").insert([{ role, content }]);
-    } catch (err) {
-      console.error("❌ Error saving message:", err);
-    }
-  }
-
-  // שליחת הודעה
   async function sendMessage() {
     if (!input.trim()) return;
 
@@ -26,9 +15,6 @@ export default function ChatBot() {
     setMessages(newMessages);
     setInput("");
     setLoading(true);
-
-    // שמור את הודעת המשתמש
-    await saveMessage("user", input);
 
     try {
       const res = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -39,7 +25,23 @@ export default function ChatBot() {
         },
         body: JSON.stringify({
           model: "gpt-4o-mini",
-          messages: newMessages,
+          messages: [
+            {
+              role: "system",
+              content: `
+              אתה בוט שירות לקוחות ומכירות חכם של S'ean Apps.
+              תפקידך לענות ללקוחות בעברית בלבד, להיות איש מכירות NLP, לזהות צרכים,
+              להתגבר על התנגדויות ולהציע תמיד את מסלולי המכירה:
+              - מסלול התנסות חינמי ("קח, תהנה, תרגיש ותתמכר לסדר ולצמיחה – בינתיים חינם!")
+              - 1+1 ב־99 ₪ לחודש
+              - 4 אפליקציות ב־198 ₪ לחודש (הכי משתלם)
+              האפליקציות: מציאת לקוחות חדשים, תזרים מזומנים + יועץ עסקי AI, ניהול מחסן אישי,
+              שיווק חכם + יועץ שיווקי AI, תמיכה והתקשרות, מחשבון משלוחים והובלות, בוט שירות לקוחות.
+              תמיד תסיים שיחה בהצעת מסלול.
+              `,
+            },
+            ...newMessages,
+          ],
         }),
       });
 
@@ -47,17 +49,13 @@ export default function ChatBot() {
       const reply =
         data.choices?.[0]?.message?.content || "❌ שגיאה בתשובה";
 
-      const assistantMessage = { role: "assistant", content: reply };
-      setMessages([...newMessages, assistantMessage]);
-
-      // שמור את תשובת הבוט
-      await saveMessage("assistant", reply);
+      setMessages([...newMessages, { role: "assistant", content: reply }]);
     } catch (err) {
       console.error(err);
-      const errorMsg = { role: "assistant", content: "⚠️ שגיאה בשרת" };
-      setMessages([...newMessages, errorMsg]);
-
-      await saveMessage("assistant", "⚠️ שגיאה בשרת");
+      setMessages([
+        ...newMessages,
+        { role: "assistant", content: "⚠️ שגיאה בשרת" },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -77,7 +75,6 @@ export default function ChatBot() {
         height: "80vh",
       }}
     >
-      {/* חלון הצ'אט */}
       <div
         style={{
           flex: 1,
@@ -111,7 +108,6 @@ export default function ChatBot() {
         {loading && <p>⏳ מחכה לתשובה...</p>}
       </div>
 
-      {/* שורת קלט */}
       <div
         style={{
           display: "flex",
