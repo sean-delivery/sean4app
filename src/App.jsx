@@ -8,6 +8,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import ChatBot from "./ChatBot";
+import LeadsPage from "./pages/LeadsPage"; // ⬅️ הוסף למעלה
 import GoogleAPISearch from "./pages/GoogleAPISearch"; // ✅ חיבור חדש
 import "./App.css";
 
@@ -141,19 +142,19 @@ export default function App() {
   return (
     <Router>
       <Header user={user} onLogout={logout} />
-      <Routes>
-        <Route path="/" element={<Navigate to="/apps" />} />
-        <Route path="/apps" element={<AppsPage />} />
+<Routes>
+  <Route path="/" element={<Navigate to="/apps" />} />
+  <Route path="/apps" element={<AppsPage />} />
 
-        {/* ✅ עכשיו /apps/leads פותח את GoogleAPISearch */}
-        <Route path="/apps/leads" element={<GoogleAPISearch />} />
+  {/* כאן השינוי */}
+  <Route path="/apps/leads" element={<GoogleAPISearch />} />
 
-        <Route path="/apps/cashflow" element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />} />
-        <Route path="/apps/warehouse" element={<Placeholder title="ניהול מחסן אישי" />} />
-        <Route path="/apps/marketing" element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />} />
-        <Route path="/apps/support" element={<Placeholder title="תמיכה והתקשרות" />} />
-        <Route path="/apps/chatbot" element={<ChatBot />} />
-      </Routes>
+  <Route path="/apps/cashflow" element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />} />
+  <Route path="/apps/warehouse" element={<Placeholder title="ניהול מחסן אישי" />} />
+  <Route path="/apps/marketing" element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />} />
+  <Route path="/apps/support" element={<Placeholder title="תמיכה והתקשרות" />} />
+  <Route path="/apps/chatbot" element={<ChatBot />} />
+</Routes>
       <Footer />
     </Router>
   );
