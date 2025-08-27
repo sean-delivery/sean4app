@@ -8,12 +8,13 @@ import {
   Navigate,
 } from "react-router-dom";
 
+/* ===== Header ===== */
 function Header({ user, onLogout }) {
   return (
     <header
       style={{
         width: "100%",
-        padding: "10px 20px",
+        padding: "15px 25px",
         background: "#2563eb",
         color: "white",
         display: "flex",
@@ -22,20 +23,23 @@ function Header({ user, onLogout }) {
         boxSizing: "border-box",
       }}
     >
-      <div>S'ean Apps</div>
+      <div style={{ fontWeight: "bold", fontSize: "18px" }}>S'ean Apps</div>
       <div>
         {user?.email && (
-          <span style={{ marginRight: "15px" }}>מחובר כ־ {user.email}</span>
+          <span style={{ marginRight: "20px", fontSize: "14px" }}>
+            מחובר כ־ {user.email}
+          </span>
         )}
         <button
           onClick={onLogout}
           style={{
-            padding: "6px 12px",
+            padding: "8px 16px",
             background: "#ef4444",
             color: "white",
             border: "none",
-            borderRadius: "4px",
+            borderRadius: "6px",
             cursor: "pointer",
+            fontSize: "14px",
           }}
         >
           התנתקות
@@ -45,6 +49,7 @@ function Header({ user, onLogout }) {
   );
 }
 
+/* ===== Footer ===== */
 function Footer() {
   return (
     <footer
@@ -53,6 +58,7 @@ function Footer() {
         textAlign: "center",
         fontSize: "13px",
         color: "#555",
+        padding: "15px 0",
       }}
     >
       © כל הזכויות שמורות לנחמני שון
@@ -60,22 +66,32 @@ function Footer() {
   );
 }
 
+/* ===== Placeholder ===== */
 function Placeholder({ title }) {
   const navigate = useNavigate();
   return (
-    <div style={{ padding: "40px", textAlign: "center" }}>
+    <div
+      style={{
+        padding: "40px",
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <h2>{title}</h2>
-      <p>תוכן יופיע כאן בהמשך...</p>
+      <p style={{ marginBottom: "20px" }}>תוכן יופיע כאן בהמשך...</p>
       <button
         onClick={() => navigate("/apps")}
         style={{
           marginTop: "20px",
-          padding: "10px 20px",
+          padding: "12px 24px",
           background: "#2563eb",
           color: "white",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
+          fontSize: "15px",
         }}
       >
         חזרה לאפליקציות
@@ -84,71 +100,91 @@ function Placeholder({ title }) {
   );
 }
 
+/* ===== Apps Page ===== */
 function AppsPage() {
   const navigate = useNavigate();
 
   return (
     <div
       style={{
-        minHeight: "calc(100vh - 100px)",
+        minHeight: "calc(100vh - 120px)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "flex-start",
+        justifyContent: "center",
         padding: "20px",
         textAlign: "center",
       }}
     >
-      <h1>עכשיו אני מתחיל לייצר כסף 🚀</h1>
-      <p style={{ marginBottom: "30px" }}>
-        6 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!
+      <h1 style={{ marginBottom: "10px", fontSize: "28px" }}>
+        עכשיו אני מתחיל לייצר כסף 🚀
+      </h1>
+      <p style={{ marginBottom: "30px", fontSize: "16px", color: "#444" }}>
+        4 באחד – הדרך שלך לצמיחה מהירה!
       </p>
 
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: "15px",
+          gap: "20px",
           width: "100%",
           maxWidth: "1000px",
         }}
       >
+        {/* 4 אפליקציות עיקריות */}
         <button onClick={() => navigate("/apps/leads")} style={cubeStyle}>
-          📈 אפליקציה 1 – מציאת לקוחות חדשים
+          📈 מציאת לקוחות חדשים
         </button>
         <button onClick={() => navigate("/apps/cashflow")} style={cubeStyle}>
-          💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI
+          💰 תזרים מזומנים + יועץ עסקי AI
         </button>
         <button onClick={() => navigate("/apps/warehouse")} style={cubeStyle}>
-          📦 אפליקציה 3 – ניהול מחסן אישי
+          📦 ניהול מחסן אישי
         </button>
         <button onClick={() => navigate("/apps/marketing")} style={cubeStyle}>
-          📢 אפליקציה 4 – שיווק חכם + יועץ שיווקי AI
+          📢 שיווק חכם + יועץ שיווקי AI
         </button>
-        <button onClick={() => navigate("/apps/support")} style={cubeStyle}>
-          📞 אפליקציה 5 – תמיכה והתקשרות
+
+        {/* 2 קוביות נוספות עם גבול תכלת */}
+        <button onClick={() => navigate("/apps/support")} style={cubeBlue}>
+          📞 תמיכה והתקשרות
         </button>
         <button
           onClick={() => window.open("https://wa.me/972586177022", "_blank")}
-          style={cubeStyle}
+          style={cubeBlue}
         >
-          🚚 אפליקציה 6 – מחשבון משלוחים והובלות לכל הארץ
+          🚚 מחשבון משלוחים והובלות לכל הארץ
         </button>
       </div>
     </div>
   );
 }
 
+/* ===== עיצוב לקוביות ===== */
 const cubeStyle = {
   background: "#fff",
-  padding: "20px",
+  padding: "25px 20px",
   borderRadius: "12px",
   boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
   border: "none",
   cursor: "pointer",
-  fontSize: "15px",
+  fontSize: "16px",
+  transition: "all 0.3s ease",
+  textAlign: "center",
 };
+const cubeBlue = {
+  ...cubeStyle,
+  border: "2px solid #2563eb",
+};
+Object.assign(cubeStyle, {
+  ":hover": {
+    transform: "translateY(-5px)",
+    boxShadow: "0 6px 12px rgba(0,0,0,0.15)",
+  },
+});
 
+/* ===== App Component ===== */
 export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -186,6 +222,7 @@ export default function App() {
 
   if (loading) return <p style={{ textAlign: "center" }}>טוען...</p>;
 
+  /* ===== מסך התחברות ===== */
   if (!user) {
     return (
       <div
@@ -241,6 +278,7 @@ export default function App() {
     );
   }
 
+  /* ===== מסך ראשי אחרי התחברות ===== */
   return (
     <Router>
       <Header user={user} onLogout={logout} />
