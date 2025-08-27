@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "./supabaseClient";
+import { supabase, redirectUrl } from "./supabaseClient";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,7 +7,6 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
-
 
 /* ===== Header ===== */
 function Header({ user, onLogout }) {
@@ -131,6 +130,7 @@ function AppsPage() {
           gap: "20px",
           width: "100%",
           maxWidth: "1000px",
+          justifyContent: "center",
         }}
       >
         {/* 4 אפליקציות עיקריות */}
@@ -147,7 +147,7 @@ function AppsPage() {
           📢 שיווק חכם + יועץ שיווקי AI
         </button>
 
-        {/* 2 קוביות נוספות עם גבול תכלת */}
+        {/* 2 קוביות נוספות */}
         <button onClick={() => navigate("/apps/support")} style={cubeBlue}>
           📞 תמיכה והתקשרות
         </button>
@@ -178,12 +178,6 @@ const cubeBlue = {
   ...cubeStyle,
   border: "2px solid #2563eb",
 };
-Object.assign(cubeStyle, {
-  ":hover": {
-    transform: "translateY(-5px)",
-    boxShadow: "0 6px 12px rgba(0,0,0,0.15)",
-  },
-});
 
 /* ===== App Component ===== */
 export default function App() {
@@ -200,7 +194,7 @@ export default function App() {
   async function loginWithGoogle() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: window.location.origin },
+      options: { redirectTo: redirectUrl },
     });
     if (error) alert(error.message);
   }
@@ -286,11 +280,26 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/apps" />} />
         <Route path="/apps" element={<AppsPage />} />
-        <Route path="/apps/leads" element={<Placeholder title="מציאת לקוחות חדשים" />} />
-        <Route path="/apps/cashflow" element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />} />
-        <Route path="/apps/warehouse" element={<Placeholder title="ניהול מחסן אישי" />} />
-        <Route path="/apps/marketing" element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />} />
-        <Route path="/apps/support" element={<Placeholder title="תמיכה והתקשרות" />} />
+        <Route
+          path="/apps/leads"
+          element={<Placeholder title="מציאת לקוחות חדשים" />}
+        />
+        <Route
+          path="/apps/cashflow"
+          element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />}
+        />
+        <Route
+          path="/apps/warehouse"
+          element={<Placeholder title="ניהול מחסן אישי" />}
+        />
+        <Route
+          path="/apps/marketing"
+          element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />}
+        />
+        <Route
+          path="/apps/support"
+          element={<Placeholder title="תמיכה והתקשרות" />}
+        />
       </Routes>
       <Footer />
     </Router>
