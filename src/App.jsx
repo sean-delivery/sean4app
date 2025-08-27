@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
-import { supabase } from "./supabaseClient"
+import { useEffect, useState } from "react";
+import { supabase } from "./supabaseClient";
 
 export default function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -13,7 +13,7 @@ export default function App() {
   async function loginWithGoogle() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: window.location.origin }
+      options: { redirectTo: window.location.origin },
     });
     if (error) alert(error.message);
   }
@@ -34,57 +34,89 @@ export default function App() {
     setUser(null);
   }
 
+  // מסך התחברות
   if (!user) {
     return (
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100vh",
-        fontFamily: "Segoe UI"
-      }}>
-        <h1>S'ean Apps</h1>
-        <p>כדי להמשיך – התחבר עכשיו</p>
-        <div>
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          fontFamily: "Segoe UI, sans-serif",
+          textAlign: "center",
+          padding: "20px",
+        }}
+      >
+        <h1 style={{ marginBottom: "10px" }}>S'ean Apps</h1>
+        <p style={{ marginBottom: "20px" }}>כדי להמשיך – התחבר עכשיו</p>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%", maxWidth: "250px" }}>
           <button
             onClick={loginWithGoogle}
-            style={{ padding: "10px 20px", margin: "10px", background: "#ea4335", color: "white", border: "none", borderRadius: "6px" }}
+            style={{
+              padding: "12px",
+              background: "#ea4335",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "15px",
+              cursor: "pointer",
+            }}
           >
             התחברות עם Google
           </button>
+
           <button
             onClick={loginWithEmail}
-            style={{ padding: "10px 20px", margin: "10px", background: "#2563eb", color: "white", border: "none", borderRadius: "6px" }}
+            style={{
+              padding: "12px",
+              background: "#2563eb",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "15px",
+              cursor: "pointer",
+            }}
           >
             הרשמה / כניסה ידנית
           </button>
         </div>
 
-        <footer style={{
-          marginTop: "40px",
-          fontSize: "14px",
-          color: "#555"
-        }}>
+        <p style={{ marginTop: "40px", fontSize: "13px", color: "#555" }}>
           © כל הזכויות שמורות לנחמני שון
-        </footer>
+        </p>
       </div>
     );
   }
 
+  // מסך כשהמשתמש מחובר
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      minHeight: "100vh",
-      fontFamily: "Segoe UI"
-    }}>
-      <h1>עכשיו אני מתחיל לייצר כסף 🚀</h1>
-      <p>4 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!</p>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        fontFamily: "Segoe UI, sans-serif",
+        textAlign: "center",
+        padding: "20px",
+      }}
+    >
+      <h1 style={{ marginBottom: "10px" }}>עכשיו אני מתחיל לייצר כסף 🚀</h1>
+      <p style={{ marginBottom: "20px" }}>4 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!</p>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px", padding: "20px", maxWidth: "600px" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: "15px",
+          width: "100%",
+          maxWidth: "600px",
+        }}
+      >
         <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
           📈 אפליקציה 1 – מציאת לקוחות חדשים
         </div>
@@ -101,18 +133,23 @@ export default function App() {
 
       <button
         onClick={logout}
-        style={{ marginTop: "20px", padding: "10px 20px", background: "#ef4444", color: "white", border: "none", borderRadius: "6px" }}
+        style={{
+          marginTop: "30px",
+          padding: "12px 20px",
+          background: "#ef4444",
+          color: "white",
+          border: "none",
+          borderRadius: "6px",
+          fontSize: "15px",
+          cursor: "pointer",
+        }}
       >
         התנתקות
       </button>
 
-      <footer style={{
-        marginTop: "40px",
-        fontSize: "14px",
-        color: "#555"
-      }}>
+      <p style={{ marginTop: "40px", fontSize: "13px", color: "#555" }}>
         © כל הזכויות שמורות לנחמני שון
-      </footer>
+      </p>
     </div>
   );
 }
