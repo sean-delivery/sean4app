@@ -36,45 +36,83 @@ export default function App() {
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="bg-white shadow-lg rounded-2xl p-8 text-center w-full max-w-md">
-          <h1 className="text-3xl font-bold text-indigo-700 mb-4">S'ean Apps</h1>
-          <p className="text-gray-600 mb-6">כדי להמשיך – התחבר עכשיו</p>
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        fontFamily: "Segoe UI"
+      }}>
+        <h1>S'ean Apps</h1>
+        <p>כדי להמשיך – התחבר עכשיו</p>
+        <div>
           <button
             onClick={loginWithGoogle}
-            className="w-full py-2 mb-4 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+            style={{ padding: "10px 20px", margin: "10px", background: "#ea4335", color: "white", border: "none", borderRadius: "6px" }}
           >
             התחברות עם Google
           </button>
           <button
             onClick={loginWithEmail}
-            className="w-full py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+            style={{ padding: "10px 20px", margin: "10px", background: "#2563eb", color: "white", border: "none", borderRadius: "6px" }}
           >
             הרשמה / כניסה ידנית
           </button>
         </div>
+
+        <footer style={{
+          marginTop: "40px",
+          fontSize: "14px",
+          color: "#555"
+        }}>
+          © כל הזכויות שמורות לנחמני שון
+        </footer>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
-      <h1 className="text-3xl font-bold text-indigo-700 mb-2">עכשיו אני מתחיל לייצר כסף 🚀</h1>
-      <p className="text-gray-600 mb-8">4 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!</p>
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "100vh",
+      fontFamily: "Segoe UI"
+    }}>
+      <h1>עכשיו אני מתחיל לייצר כסף 🚀</h1>
+      <p>4 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!</p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
-        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">📈 אפליקציה 1 – מציאת לקוחות חדשים</div>
-        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI</div>
-        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">📦 אפליקציה 3 – ניהול מחסן אישי</div>
-        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">📢 אפליקציה 4 – שיווק חכם + יועץ שיווקי AI</div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px", padding: "20px", maxWidth: "600px" }}>
+        <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
+          📈 אפליקציה 1 – מציאת לקוחות חדשים
+        </div>
+        <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
+          💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI
+        </div>
+        <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
+          📦 אפליקציה 3 – ניהול מחסן אישי
+        </div>
+        <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
+          📢 אפליקציה 4 – שיווק חכם + יועץ שיווקי AI
+        </div>
       </div>
 
       <button
         onClick={logout}
-        className="mt-10 px-6 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition"
+        style={{ marginTop: "20px", padding: "10px 20px", background: "#ef4444", color: "white", border: "none", borderRadius: "6px" }}
       >
         התנתקות
       </button>
+
+      <footer style={{
+        marginTop: "40px",
+        fontSize: "14px",
+        color: "#555"
+      }}>
+        © כל הזכויות שמורות לנחמני שון
+      </footer>
     </div>
   );
 }
