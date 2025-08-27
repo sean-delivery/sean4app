@@ -52,6 +52,7 @@ export default function App() {
           style={{
             maxWidth: "400px",
             width: "100%",
+            margin: "0 auto",
             padding: "20px",
             textAlign: "center",
             background: "#fff",
@@ -126,6 +127,7 @@ export default function App() {
         style={{
           maxWidth: "800px",
           width: "100%",
+          margin: "0 auto",
           textAlign: "center",
           background: "#fff",
           borderRadius: "12px",
