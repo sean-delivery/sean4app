@@ -148,3 +148,56 @@ body, html, #root {
     grid-template-columns: 1fr;
   }
 }
+/* Chatbot */
+.chatbot {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.chat-window {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  text-align: left;
+}
+.msg {
+  margin: 8px 0;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+.msg.user {
+  background: #2563eb;
+  color: white;
+  text-align: right;
+}
+.msg.assistant {
+  background: #f3f4f6;
+  text-align: left;
+}
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.chat-input button {
+  padding: 10px 20px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.chat-input button:hover {
+  background: #1e40af;
+  transform: scale(1.05);
+}
+

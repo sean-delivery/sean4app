@@ -7,6 +7,7 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
+import ChatBot from "./ChatBot"; // ⬅️ הוספנו
 import "./App.css";
 
 /* ===== Header ===== */
@@ -26,11 +27,7 @@ function Header({ user, onLogout }) {
 
 /* ===== Footer ===== */
 function Footer() {
-  return (
-    <footer className="footer">
-      © כל הזכויות שמורות לנחמני שון
-    </footer>
-  );
+  return <footer className="footer">© כל הזכויות שמורות לנחמני שון</footer>;
 }
 
 /* ===== Placeholder ===== */
@@ -77,6 +74,10 @@ function AppsPage() {
           className="cube-blue"
         >
           🚚 מחשבון משלוחים והובלות לכל הארץ
+        </button>
+        {/* חדש – בוט */}
+        <button onClick={() => navigate("/apps/chatbot")} className="cube">
+          🤖 בוט שירות לקוחות
         </button>
       </div>
     </div>
@@ -148,6 +149,7 @@ export default function App() {
         <Route path="/apps/warehouse" element={<Placeholder title="ניהול מחסן אישי" />} />
         <Route path="/apps/marketing" element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />} />
         <Route path="/apps/support" element={<Placeholder title="תמיכה והתקשרות" />} />
+        <Route path="/apps/chatbot" element={<ChatBot />} /> {/* ⬅️ נתיב חדש */}
       </Routes>
       <Footer />
     </Router>
