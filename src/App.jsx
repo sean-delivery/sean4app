@@ -62,38 +62,44 @@ export default function App() {
           <h1 style={{ marginBottom: "10px" }}>S'ean Apps</h1>
           <p style={{ marginBottom: "20px" }}>כדי להמשיך – התחבר עכשיו</p>
 
-          <button
-            onClick={loginWithGoogle}
+          <div
             style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
               width: "100%",
-              padding: "12px",
-              marginBottom: "10px",
-              background: "#ea4335",
-              color: "white",
-              border: "none",
-              borderRadius: "6px",
-              fontSize: "15px",
-              cursor: "pointer",
             }}
           >
-            התחברות עם Google
-          </button>
+            <button
+              onClick={loginWithGoogle}
+              style={{
+                padding: "12px",
+                background: "#ea4335",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+                fontSize: "15px",
+                cursor: "pointer",
+              }}
+            >
+              התחברות עם Google
+            </button>
 
-          <button
-            onClick={loginWithEmail}
-            style={{
-              width: "100%",
-              padding: "12px",
-              background: "#2563eb",
-              color: "white",
-              border: "none",
-              borderRadius: "6px",
-              fontSize: "15px",
-              cursor: "pointer",
-            }}
-          >
-            הרשמה / כניסה ידנית
-          </button>
+            <button
+              onClick={loginWithEmail}
+              style={{
+                padding: "12px",
+                background: "#2563eb",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+                fontSize: "15px",
+                cursor: "pointer",
+              }}
+            >
+              הרשמה / כניסה ידנית
+            </button>
+          </div>
 
           <p style={{ marginTop: "40px", fontSize: "13px", color: "#555" }}>
             © כל הזכויות שמורות לנחמני שון
@@ -103,7 +109,7 @@ export default function App() {
     );
   }
 
-  // מסך אפליקציות לאחר התחברות
+  // מסך כשהמשתמש מחובר
   return (
     <div
       style={{
@@ -139,44 +145,16 @@ export default function App() {
             gap: "15px",
           }}
         >
-          <div
-            style={{
-              background: "#fff",
-              padding: "20px",
-              borderRadius: "12px",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-            }}
-          >
+          <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
             📈 אפליקציה 1 – מציאת לקוחות חדשים
           </div>
-          <div
-            style={{
-              background: "#fff",
-              padding: "20px",
-              borderRadius: "12px",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-            }}
-          >
+          <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
             💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI
           </div>
-          <div
-            style={{
-              background: "#fff",
-              padding: "20px",
-              borderRadius: "12px",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-            }}
-          >
+          <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
             📦 אפליקציה 3 – ניהול מחסן אישי
           </div>
-          <div
-            style={{
-              background: "#fff",
-              padding: "20px",
-              borderRadius: "12px",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-            }}
-          >
+          <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
             📢 אפליקציה 4 – שיווק חכם + יועץ שיווקי AI
           </div>
         </div>
