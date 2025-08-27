@@ -7,7 +7,8 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
-import ChatBot from "./ChatBot"; // ⬅️ הוספנו
+import ChatBot from "./ChatBot";
+import GoogleAPISearch from "./pages/GoogleAPISearch"; // ✅ חיבור חדש
 import "./App.css";
 
 /* ===== Header ===== */
@@ -30,7 +31,7 @@ function Footer() {
   return <footer className="footer">© כל הזכויות שמורות לנחמני שון</footer>;
 }
 
-/* ===== Placeholder ===== */
+/* ===== Placeholder כללי לשאר האפליקציות ===== */
 function Placeholder({ title }) {
   const navigate = useNavigate();
   return (
@@ -75,7 +76,6 @@ function AppsPage() {
         >
           🚚 מחשבון משלוחים והובלות לכל הארץ
         </button>
-        {/* חדש – בוט */}
         <button onClick={() => navigate("/apps/chatbot")} className="cube">
           🤖 בוט שירות לקוחות
         </button>
@@ -144,12 +144,15 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/apps" />} />
         <Route path="/apps" element={<AppsPage />} />
-        <Route path="/apps/leads" element={<Placeholder title="מציאת לקוחות חדשים" />} />
+
+        {/* ✅ עכשיו /apps/leads פותח את GoogleAPISearch */}
+        <Route path="/apps/leads" element={<GoogleAPISearch />} />
+
         <Route path="/apps/cashflow" element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />} />
         <Route path="/apps/warehouse" element={<Placeholder title="ניהול מחסן אישי" />} />
         <Route path="/apps/marketing" element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />} />
         <Route path="/apps/support" element={<Placeholder title="תמיכה והתקשרות" />} />
-        <Route path="/apps/chatbot" element={<ChatBot />} /> {/* ⬅️ נתיב חדש */}
+        <Route path="/apps/chatbot" element={<ChatBot />} />
       </Routes>
       <Footer />
     </Router>
