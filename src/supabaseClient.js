@@ -1,11 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
 
-// נטען מה־env של Vite (ולא לשים אותם ישירות בקוד!)
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error("Missing Supabase URL or Anon Key. Check your Netlify environment variables.");
-}
+if (!supabaseUrl) throw new Error("VITE_SUPABASE_URL missing");
+if (!supabaseKey) throw new Error("VITE_SUPABASE_ANON_KEY missing");
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+  auth: { persistSession: true, autoRefreshToken: true },
+});
