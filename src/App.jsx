@@ -44,52 +44,56 @@ export default function App() {
           justifyContent: "center",
           alignItems: "center",
           fontFamily: "Segoe UI, sans-serif",
-          textAlign: "center",
           background: "#f9fafb",
+          padding: "20px",
         }}
       >
-        <div style={{ maxWidth: "400px", width: "100%", padding: "20px" }}>
+        <div
+          style={{
+            maxWidth: "400px",
+            width: "100%",
+            padding: "20px",
+            textAlign: "center",
+            background: "#fff",
+            borderRadius: "12px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+          }}
+        >
           <h1 style={{ marginBottom: "10px" }}>S'ean Apps</h1>
           <p style={{ marginBottom: "20px" }}>כדי להמשיך – התחבר עכשיו</p>
 
-          <div
+          <button
+            onClick={loginWithGoogle}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
               width: "100%",
+              padding: "12px",
+              marginBottom: "10px",
+              background: "#ea4335",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "15px",
+              cursor: "pointer",
             }}
           >
-            <button
-              onClick={loginWithGoogle}
-              style={{
-                padding: "12px",
-                background: "#ea4335",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-                fontSize: "15px",
-                cursor: "pointer",
-              }}
-            >
-              התחברות עם Google
-            </button>
+            התחברות עם Google
+          </button>
 
-            <button
-              onClick={loginWithEmail}
-              style={{
-                padding: "12px",
-                background: "#2563eb",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-                fontSize: "15px",
-                cursor: "pointer",
-              }}
-            >
-              הרשמה / כניסה ידנית
-            </button>
-          </div>
+          <button
+            onClick={loginWithEmail}
+            style={{
+              width: "100%",
+              padding: "12px",
+              background: "#2563eb",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "15px",
+              cursor: "pointer",
+            }}
+          >
+            הרשמה / כניסה ידנית
+          </button>
 
           <p style={{ marginTop: "40px", fontSize: "13px", color: "#555" }}>
             © כל הזכויות שמורות לנחמני שון
@@ -99,7 +103,7 @@ export default function App() {
     );
   }
 
-  // מסך כשהמשתמש מחובר
+  // מסך אפליקציות לאחר התחברות
   return (
     <div
       style={{
@@ -108,12 +112,21 @@ export default function App() {
         justifyContent: "center",
         alignItems: "center",
         fontFamily: "Segoe UI, sans-serif",
-        textAlign: "center",
         background: "#f9fafb",
         padding: "20px",
       }}
     >
-      <div style={{ maxWidth: "800px", width: "100%" }}>
+      <div
+        style={{
+          maxWidth: "800px",
+          width: "100%",
+          textAlign: "center",
+          background: "#fff",
+          borderRadius: "12px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+          padding: "30px",
+        }}
+      >
         <h1 style={{ marginBottom: "10px" }}>עכשיו אני מתחיל לייצר כסף 🚀</h1>
         <p style={{ marginBottom: "20px" }}>
           4 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!
@@ -122,20 +135,48 @@ export default function App() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
             gap: "15px",
           }}
         >
-          <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
+          <div
+            style={{
+              background: "#fff",
+              padding: "20px",
+              borderRadius: "12px",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+            }}
+          >
             📈 אפליקציה 1 – מציאת לקוחות חדשים
           </div>
-          <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
+          <div
+            style={{
+              background: "#fff",
+              padding: "20px",
+              borderRadius: "12px",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+            }}
+          >
             💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI
           </div>
-          <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
+          <div
+            style={{
+              background: "#fff",
+              padding: "20px",
+              borderRadius: "12px",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+            }}
+          >
             📦 אפליקציה 3 – ניהול מחסן אישי
           </div>
-          <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
+          <div
+            style={{
+              background: "#fff",
+              padding: "20px",
+              borderRadius: "12px",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+            }}
+          >
             📢 אפליקציה 4 – שיווק חכם + יועץ שיווקי AI
           </div>
         </div>
