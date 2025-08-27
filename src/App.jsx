@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
-
-// יצירת חיבור ל-Supabase מה-Environment Variables
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+import { useEffect, useState } from "react"
+import { supabase } from "./supabaseClient"
 
 export default function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -42,48 +36,42 @@ export default function App() {
 
   if (!user) {
     return (
-      <div style={{ textAlign: "center", marginTop: "80px", fontFamily: "Segoe UI" }}>
-        <h1>S'ean Apps</h1>
-        <p>כדי להמשיך – התחבר עכשיו</p>
-        <button
-          onClick={loginWithGoogle}
-          style={{ padding: "10px 20px", margin: "10px", background: "#ea4335", color: "white", border: "none", borderRadius: "6px" }}
-        >
-          התחברות עם Google
-        </button>
-        <button
-          onClick={loginWithEmail}
-          style={{ padding: "10px 20px", margin: "10px", background: "#2563eb", color: "white", border: "none", borderRadius: "6px" }}
-        >
-          הרשמה / כניסה ידנית
-        </button>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="bg-white shadow-lg rounded-2xl p-8 text-center w-full max-w-md">
+          <h1 className="text-3xl font-bold text-indigo-700 mb-4">S'ean Apps</h1>
+          <p className="text-gray-600 mb-6">כדי להמשיך – התחבר עכשיו</p>
+          <button
+            onClick={loginWithGoogle}
+            className="w-full py-2 mb-4 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+          >
+            התחברות עם Google
+          </button>
+          <button
+            onClick={loginWithEmail}
+            className="w-full py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+          >
+            הרשמה / כניסה ידנית
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ textAlign: "center", fontFamily: "Segoe UI" }}>
-      <h1>עכשיו אני מתחיל לייצר כסף 🚀</h1>
-      <p>4 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!</p>
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
+      <h1 className="text-3xl font-bold text-indigo-700 mb-2">עכשיו אני מתחיל לייצר כסף 🚀</h1>
+      <p className="text-gray-600 mb-8">4 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!</p>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px", padding: "20px" }}>
-        <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
-          📈 אפליקציה 1 – מציאת לקוחות חדשים
-        </div>
-        <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
-          💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI
-        </div>
-        <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
-          📦 אפליקציה 3 – ניהול מחסן אישי
-        </div>
-        <div style={{ background: "#fff", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)" }}>
-          📢 אפליקציה 4 – שיווק חכם + יועץ שיווקי AI
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
+        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">📈 אפליקציה 1 – מציאת לקוחות חדשים</div>
+        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI</div>
+        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">📦 אפליקציה 3 – ניהול מחסן אישי</div>
+        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">📢 אפליקציה 4 – שיווק חכם + יועץ שיווקי AI</div>
       </div>
 
       <button
         onClick={logout}
-        style={{ marginTop: "20px", padding: "10px 20px", background: "#ef4444", color: "white", border: "none", borderRadius: "6px" }}
+        className="mt-10 px-6 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition"
       >
         התנתקות
       </button>
