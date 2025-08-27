@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase, redirectUrl } from "./supabaseClient";
+import { supabase } from "./supabaseClient";
 import {
   BrowserRouter as Router,
   Routes,
@@ -59,6 +59,7 @@ function Footer() {
         fontSize: "13px",
         color: "#555",
         padding: "15px 0",
+        width: "100%",
       }}
     >
       © כל הזכויות שמורות לנחמני שון
@@ -72,11 +73,12 @@ function Placeholder({ title }) {
   return (
     <div
       style={{
-        padding: "40px",
-        textAlign: "center",
+        minHeight: "calc(100vh - 120px)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
       }}
     >
       <h2>{title}</h2>
@@ -92,6 +94,7 @@ function Placeholder({ title }) {
           borderRadius: "6px",
           cursor: "pointer",
           fontSize: "15px",
+          transition: "all 0.3s ease",
         }}
       >
         חזרה לאפליקציות
@@ -114,13 +117,15 @@ function AppsPage() {
         justifyContent: "center",
         padding: "20px",
         textAlign: "center",
+        margin: "0 auto",
+        width: "100%",
       }}
     >
       <h1 style={{ marginBottom: "10px", fontSize: "28px" }}>
         עכשיו אני מתחיל לייצר כסף 🚀
       </h1>
       <p style={{ marginBottom: "30px", fontSize: "16px", color: "#444" }}>
-        4 באחד – הדרך שלך לצמיחה מהירה!
+        הדרך שלך לצמיחה מהירה 🚀
       </p>
 
       <div
@@ -131,6 +136,8 @@ function AppsPage() {
           width: "100%",
           maxWidth: "1000px",
           justifyContent: "center",
+          alignItems: "center",
+          margin: "0 auto",
         }}
       >
         {/* 4 אפליקציות עיקריות */}
@@ -147,7 +154,7 @@ function AppsPage() {
           📢 שיווק חכם + יועץ שיווקי AI
         </button>
 
-        {/* 2 קוביות נוספות */}
+        {/* 2 קוביות נוספות עם גבול תכלת */}
         <button onClick={() => navigate("/apps/support")} style={cubeBlue}>
           📞 תמיכה והתקשרות
         </button>
@@ -179,6 +186,17 @@ const cubeBlue = {
   border: "2px solid #2563eb",
 };
 
+/* ===== הוספת hover אפקט ===== */
+const addHoverEffect = (style) => ({
+  ...style,
+  ":hover": {
+    transform: "translateY(-5px)",
+    boxShadow: "0 6px 12px rgba(0,0,0,0.15)",
+  },
+});
+Object.assign(cubeStyle, addHoverEffect(cubeStyle));
+Object.assign(cubeBlue, addHoverEffect(cubeBlue));
+
 /* ===== App Component ===== */
 export default function App() {
   const [user, setUser] = useState(null);
@@ -194,7 +212,7 @@ export default function App() {
   async function loginWithGoogle() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: redirectUrl },
+      options: { redirectTo: window.location.origin },
     });
     if (error) alert(error.message);
   }
@@ -231,6 +249,7 @@ export default function App() {
           background: "#f9fafb",
           textAlign: "center",
           padding: "20px",
+          margin: "0 auto",
         }}
       >
         <h1>S'ean Apps</h1>
@@ -247,6 +266,7 @@ export default function App() {
             borderRadius: "6px",
             fontSize: "15px",
             cursor: "pointer",
+            transition: "all 0.3s ease",
           }}
         >
           התחברות עם Google
@@ -263,6 +283,7 @@ export default function App() {
             borderRadius: "6px",
             fontSize: "15px",
             cursor: "pointer",
+            transition: "all 0.3s ease",
           }}
         >
           הרשמה / כניסה ידנית
