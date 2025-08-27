@@ -8,6 +8,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
+
 /* ===== Header ===== */
 function Header({ user, onLogout }) {
   return (
