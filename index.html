@@ -20,28 +20,40 @@
       font-weight: bold;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
-    h1 {
-      margin-top: 30px;
-      font-size: 26px;
-      color: #111827;
+    h1 { margin-top: 30px; font-size: 26px; color: #111827; }
+    p.slogan { font-size: 18px; color: #2563eb; margin-bottom: 30px; }
+
+    .hidden { display: none; }
+
+    /* login screen */
+    #login {
+      margin-top: 60px;
     }
-    p.slogan {
-      font-size: 18px;
-      color: #2563eb;
-      margin-bottom: 30px;
-    }
-    .article {
-      max-width: 600px;
-      margin: 0 auto 30px;
+    .login-btn {
+      display: block;
+      margin: 15px auto;
+      padding: 12px 24px;
       font-size: 16px;
-      line-height: 1.6;
-      color: #374151;
+      font-weight: 600;
+      color: white;
+      background: #10b981;
+      border-radius: 8px;
+      text-decoration: none;
+      width: 220px;
+      transition: background 0.2s;
     }
+    .login-btn.google { background: #ea4335; }
+    .login-btn.google:hover { background: #c53030; }
+    .login-btn.manual { background: #2563eb; }
+    .login-btn.manual:hover { background: #1d4ed8; }
+
+    /* apps grid */
     .apps {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 15px;
       padding: 0 20px;
+      margin-top: 30px;
     }
     .app-card {
       background: white;
@@ -51,12 +63,24 @@
       font-size: 16px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.2s, box-shadow 0.2s;
+      cursor: not-allowed;
+      position: relative;
+    }
+    .app-card.locked::after {
+      content: "🔒";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+    }
+    .app-card.unlocked {
       cursor: pointer;
     }
-    .app-card:hover {
+    .app-card.unlocked:hover {
       transform: translateY(-4px);
       box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
+
     .support-btn {
       display: inline-block;
       margin: 25px auto;
@@ -69,9 +93,6 @@
       text-decoration: none;
       transition: background 0.2s;
     }
-    .support-btn:hover {
-      background: #059669;
-    }
     footer {
       margin-top: 40px;
       background: #f3f4f6;
@@ -80,45 +101,28 @@
       color: #555;
       border-top: 1px solid #ddd;
     }
-    footer a {
-      color: #2563eb;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    footer a:hover {
-      text-decoration: underline;
-    }
+    footer a { color: #2563eb; font-weight: 600; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
   <header>S'ean Apps</header>
 
-  <h1>עכשיו אני מתחיל לייצר כסף 🚀</h1>
-  <p class="slogan">4 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!</p>
+  <!-- Login Screen -->
+  <section id="login">
+    <h1>ברוך הבא 👋</h1>
+    <p class="slogan">כדי להמשיך – התחבר עכשיו</p>
+    <a href="#" class="login-btn google" onclick="login()">התחברות עם Google</a>
+    <a href="#" class="login-btn manual" onclick="login()">הרשמה / כניסה ידנית</a>
+  </section>
 
-  <div class="article">
-    <p>
-      ברוכים הבאים ל־S'ean Apps – כאן מתחילה הצמיחה של העסק שלך.  
-      מציאת לקוחות חדשים, ניהול תזרים מזומנים חכם, ניהול מחסן אישי קטן  
-      ושיווק מלא באמצעות AI – כל זה במקום אחד, פשוט וידידותי.  
-      עם הכלים שלנו, הדרך ל־1000 מכירות ביום עוברת כאן.  
-    </p>
-  </div>
+  <!-- Apps Screen -->
+  <section id="apps" class="hidden">
+    <h1>עכשיו אני מתחיל לייצר כסף 🚀</h1>
+    <p class="slogan">4 אפליקציות במקום אחד – הדרך שלך לצמיחה מהירה!</p>
 
-  <div class="apps">
-    <div class="app-card">📈 אפליקציה 1 – מציאת לקוחות חדשים</div>
-    <div class="app-card">💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI</div>
-    <div class="app-card">📦 אפליקציה 3 – ניהול מחסן אישי</div>
-    <div class="app-card">📢 אפליקציה 4 – שיווק חכם + יועץ שיווקי AI</div>
-  </div>
-
-  <a href="#" class="support-btn">תמיכה</a>
-
-  <footer>
-    <a href="https://wa.me/972586177022">💬 דבר עם נציג עכשיו בוואטסאפ</a><br>
-    © כל הזכויות שמורות לנחמני שון
-  </footer>
-
-</body>
-</html>
+    <div class="apps">
+      <div class="app-card locked" id="app1">📈 אפליקציה 1 – מציאת לקוחות חדשים</div>
+      <div class="app-card locked" id="app2">💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI</div>
+      <div class="app-card locked" id="app3">📦 א
