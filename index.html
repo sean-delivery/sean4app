@@ -26,9 +26,7 @@
     .hidden { display: none; }
 
     /* login screen */
-    #login {
-      margin-top: 60px;
-    }
+    #login { margin-top: 60px; }
     .login-btn {
       display: block;
       margin: 15px auto;
@@ -36,7 +34,6 @@
       font-size: 16px;
       font-weight: 600;
       color: white;
-      background: #10b981;
       border-radius: 8px;
       text-decoration: none;
       width: 220px;
@@ -113,8 +110,8 @@
   <section id="login">
     <h1>ברוך הבא 👋</h1>
     <p class="slogan">כדי להמשיך – התחבר עכשיו</p>
-    <a href="#" class="login-btn google" onclick="login()">התחברות עם Google</a>
-    <a href="#" class="login-btn manual" onclick="login()">הרשמה / כניסה ידנית</a>
+    <a href="#" class="login-btn google" onclick="loginWithGoogle()">התחברות עם Google</a>
+    <a href="#" class="login-btn manual" onclick="loginWithEmail()">הרשמה / כניסה ידנית</a>
   </section>
 
   <!-- Apps Screen -->
@@ -125,4 +122,60 @@
     <div class="apps">
       <div class="app-card locked" id="app1">📈 אפליקציה 1 – מציאת לקוחות חדשים</div>
       <div class="app-card locked" id="app2">💰 אפליקציה 2 – תזרים מזומנים + יועץ עסקי AI</div>
-      <div class="app-card locked" id="app3">📦 א
+      <div class="app-card locked" id="app3">📦 אפליקציה 3 – ניהול מחסן אישי</div>
+      <div class="app-card locked" id="app4">📢 אפליקציה 4 – שיווק חכם + יועץ שיווקי AI</div>
+    </div>
+
+    <a href="#" class="support-btn">תמיכה</a>
+  </section>
+
+  <footer>
+    <a href="https://wa.me/972586177022">💬 דבר עם נציג עכשיו בוואטסאפ</a><br>
+    © כל הזכויות שמורות לנחמני שון
+  </footer>
+
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
+
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // כניסה עם גוגל
+    async function loginWithGoogle() {
+      const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+      if (error) alert(error.message);
+    }
+
+    // כניסה ידנית עם אימייל/סיסמה
+    async function loginWithEmail() {
+      const email = prompt("הכנס אימייל:");
+      const password = prompt("הכנס סיסמה:");
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) alert(error.message);
+      else showApps();
+    }
+
+    // להציג אפליקציות אחרי התחברות
+    function showApps() {
+      document.getElementById("login").classList.add("hidden");
+      document.getElementById("apps").classList.remove("hidden");
+      const apps = document.querySelectorAll(".app-card");
+      apps.forEach(app => {
+        app.classList.remove("locked");
+        app.classList.add("unlocked");
+        app.style.cursor = "pointer";
+      });
+    }
+
+    // בדיקת משתמש קיים
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) showApps();
+    });
+
+    window.loginWithGoogle = loginWithGoogle;
+    window.loginWithEmail = loginWithEmail;
+  </script>
+
+</body>
+</html>
