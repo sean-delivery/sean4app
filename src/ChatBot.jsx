@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "./supabaseClient"; // חיבור ל-Supabase
 
 export default function ChatBot() {
   const [messages, setMessages] = useState([
@@ -7,6 +8,16 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // פונקציה לשמירת הודעה ב-Supabase
+  async function saveMessage(role, content) {
+    try {
+      await supabase.from("chat_messages").insert([{ role, content }]);
+    } catch (err) {
+      console.error("❌ Error saving message:", err);
+    }
+  }
+
+  // שליחת הודעה
   async function sendMessage() {
     if (!input.trim()) return;
 
@@ -15,6 +26,9 @@ export default function ChatBot() {
     setMessages(newMessages);
     setInput("");
     setLoading(true);
+
+    // שמור את הודעת המשתמש
+    await saveMessage("user", input);
 
     try {
       const res = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -33,13 +47,17 @@ export default function ChatBot() {
       const reply =
         data.choices?.[0]?.message?.content || "❌ שגיאה בתשובה";
 
-      setMessages([...newMessages, { role: "assistant", content: reply }]);
+      const assistantMessage = { role: "assistant", content: reply };
+      setMessages([...newMessages, assistantMessage]);
+
+      // שמור את תשובת הבוט
+      await saveMessage("assistant", reply);
     } catch (err) {
       console.error(err);
-      setMessages([
-        ...newMessages,
-        { role: "assistant", content: "⚠️ שגיאה בשרת" },
-      ]);
+      const errorMsg = { role: "assistant", content: "⚠️ שגיאה בשרת" };
+      setMessages([...newMessages, errorMsg]);
+
+      await saveMessage("assistant", "⚠️ שגיאה בשרת");
     } finally {
       setLoading(false);
     }
@@ -59,6 +77,7 @@ export default function ChatBot() {
         height: "80vh",
       }}
     >
+      {/* חלון הצ'אט */}
       <div
         style={{
           flex: 1,
@@ -92,6 +111,7 @@ export default function ChatBot() {
         {loading && <p>⏳ מחכה לתשובה...</p>}
       </div>
 
+      {/* שורת קלט */}
       <div
         style={{
           display: "flex",
