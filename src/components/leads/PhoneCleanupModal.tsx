@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { X, Phone, CheckCircle, AlertTriangle, Trash2, Zap } from "lucide-react";
-
-interface Lead {
-  id: string;
-  name: string;
-  phone: string;
-}
+import { X, Trash2, Zap } from "lucide-react";
+import { Lead } from "../../types/lead"; // ✅ ייבוא מהקובץ המשותף
 
 interface PhoneCleanupModalProps {
   leads: Lead[];
@@ -104,7 +99,7 @@ const PhoneCleanupModal: React.FC<PhoneCleanupModalProps> = ({ leads, onClose, o
     if (selectedLeads.size === 0) return alert("❌ בחר לידים לעיצוב");
 
     const updated = leads.map((l) =>
-      selectedLeads.has(l.id) ? { ...l, phone: formatPhone(l.phone) } : l
+      selectedLeads.has(l.id) ? { ...l, phone: formatPhone(l.phone ?? "") } : l
     );
 
     onCleanup(updated);
@@ -157,13 +152,13 @@ const PhoneCleanupModal: React.FC<PhoneCleanupModalProps> = ({ leads, onClose, o
         {/* Lists */}
         <div className="p-6 space-y-6">
           {cleanupResults.invalid.length > 0 && (
-            <CategoryBlock title="לא תקינים" color="red" leads={cleanupResults.invalid} toggleSelect={toggleSelect} selected={selectedLeads} />
+            <CategoryBlock title="לא תקינים" color="text-red-400" border="border-red-500/30" leads={cleanupResults.invalid} toggleSelect={toggleSelect} selected={selectedLeads} />
           )}
           {cleanupResults.duplicates.length > 0 && (
-            <CategoryBlock title="כפולים" color="orange" leads={cleanupResults.duplicates} toggleSelect={toggleSelect} selected={selectedLeads} />
+            <CategoryBlock title="כפולים" color="text-orange-400" border="border-orange-500/30" leads={cleanupResults.duplicates} toggleSelect={toggleSelect} selected={selectedLeads} />
           )}
           {cleanupResults.empty.length > 0 && (
-            <CategoryBlock title="ריקים" color="gray" leads={cleanupResults.empty} toggleSelect={toggleSelect} selected={selectedLeads} />
+            <CategoryBlock title="ריקים" color="text-gray-400" border="border-gray-500/30" leads={cleanupResults.empty} toggleSelect={toggleSelect} selected={selectedLeads} />
           )}
         </div>
       </div>
@@ -172,19 +167,19 @@ const PhoneCleanupModal: React.FC<PhoneCleanupModalProps> = ({ leads, onClose, o
 };
 
 /** 🔧 בלוק קטגוריה לשימוש חוזר */
-function CategoryBlock({ title, color, leads, toggleSelect, selected }: any) {
+function CategoryBlock({ title, color, border, leads, toggleSelect, selected }: any) {
   return (
-    <div className={`bg-${color}-500/10 border border-${color}-500/30 rounded-lg p-4`}>
-      <h3 className={`text-lg font-semibold text-${color}-400 mb-2 text-right`}>
+    <div className={`bg-slate-700/30 rounded-lg p-4 border ${border}`}>
+      <h3 className={`text-lg font-semibold ${color} mb-2 text-right`}>
         {title} ({leads.length})
       </h3>
       <div className="space-y-2 max-h-40 overflow-y-auto">
-        {leads.map((lead: any) => (
+        {leads.map((lead: Lead) => (
           <div key={lead.id} className="flex items-center justify-between p-2 bg-slate-700/50 rounded">
             <input type="checkbox" checked={selected.has(lead.id)} onChange={() => toggleSelect(lead.id)} />
             <div className="text-right">
-              <div className="text-white text-sm">{lead.name}</div>
-              <div className={`text-${color}-400 text-xs`}>{lead.phone || "אין טלפון"}</div>
+              <div className="text-white text-sm">{lead.business_name}</div>
+              <div className={`${color} text-xs`}>{lead.phone || "אין טלפון"}</div>
             </div>
           </div>
         ))}

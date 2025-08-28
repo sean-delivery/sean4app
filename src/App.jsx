@@ -1,3 +1,4 @@
+// src/App.tsx
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 import {
@@ -12,6 +13,10 @@ import {
 import ChatBot from "./ChatBot";
 import LeadsPage from "./pages/LeadsPage";
 import GoogleAPISearch from "./pages/GoogleAPISearch";
+import TrackingPage from "./pages/TrackingPage";
+import FavoritesPage from "./pages/FavoritesPage";   // פייבוריטים (מעקב אישי)
+import CalendarPage from "./pages/CalendarManager";  // לוח שנה
+
 import BottomNav from "./components/BottomNav";
 import "./App.css";
 
@@ -40,7 +45,9 @@ function Placeholder({ title }) {
     <div className="placeholder">
       <h2>{title}</h2>
       <p>תוכן יופיע כאן בהמשך...</p>
-      <button onClick={() => navigate("/apps")} className="back-btn">חזרה לאפליקציות</button>
+      <button onClick={() => navigate("/apps")} className="back-btn">
+        חזרה לאפליקציות
+      </button>
     </div>
   );
 }
@@ -148,13 +155,20 @@ export default function App() {
         <Route path="/" element={<Navigate to="/apps" />} />
         <Route path="/apps" element={<AppsPage />} />
 
-        {/* חיפוש לקוחות → תמיד ייפתח כאן */}
+        {/* חיפוש לקוחות */}
         <Route path="/apps/leads" element={<><GoogleAPISearch /><BottomNav /></>} />
-
-        {/* טבלת לקוחות שנשמרו */}
         <Route path="/apps/leads/results" element={<><LeadsPage /><BottomNav /></>} />
 
-        {/* שאר האפליקציות */}
+        {/* מעקב (פייבוריט) */}
+        <Route path="/apps/favorites" element={<><FavoritesPage /><BottomNav /></>} />
+
+        {/* מעקב חיפושים */}
+        <Route path="/apps/tracking" element={<><TrackingPage /><BottomNav /></>} />
+
+        {/* לוח שנה */}
+        <Route path="/apps/calendar" element={<><CalendarPage /><BottomNav /></>} />
+
+        {/* אפליקציות נוספות */}
         <Route path="/apps/cashflow" element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />} />
         <Route path="/apps/warehouse" element={<Placeholder title="ניהול מחסן אישי" />} />
         <Route path="/apps/marketing" element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />} />

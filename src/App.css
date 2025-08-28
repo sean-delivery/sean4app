@@ -7,8 +7,6 @@ body, html, #root {
   background: #f9fafb;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 /* Header */
@@ -142,12 +140,44 @@ body, html, #root {
   transform: translateY(-3px);
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .apps-grid {
-    grid-template-columns: 1fr;
+/* טבלאות רספונסיביות */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+table th {
+  background: #f3f4f6;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  table {
+    font-size: 12px;
+  }
+  table th, table td {
+    padding: 6px;
   }
 }
+
 /* Chatbot */
 .chatbot {
   max-width: 600px;
@@ -200,4 +230,3 @@ body, html, #root {
   background: #1e40af;
   transform: scale(1.05);
 }
-
