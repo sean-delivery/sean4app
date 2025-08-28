@@ -10,11 +10,10 @@ import {
 
 // דפי אפליקציה
 import ChatBot from "./ChatBot";
-import LeadsPage from "./pages/LeadsPage";
-import GoogleAPISearch from "./pages/GoogleAPISearch"; // אם תרצה מסך חיפוש עצמאי
+import LeadsPage from "./pages/LeadsPage";       // טבלת לידים
+import GoogleAPISearch from "./pages/GoogleAPISearch"; // חיפוש לידים
 
 import "./App.css";
-
 
 /* ===== Header ===== */
 function Header({ user, onLogout }) {
@@ -147,11 +146,12 @@ export default function App() {
     <Router>
       <Header user={user} onLogout={logout} />
       <Routes>
-        <Route path="/" element={<Navigate to="/apps" />} />
+        <Route path="/" element={<Navigate to="/apps/leads" />} /> 
         <Route path="/apps" element={<AppsPage />} />
 
-        {/* מציאת לקוחות - עם הטבלאות וה־BottomNav */}
-        <Route path="/apps/leads" element={<LeadsPage />} />
+        {/* מציאת לקוחות - מסך חיפוש ואח"כ טבלה */}
+        <Route path="/apps/leads" element={<GoogleAPISearch />} />
+        <Route path="/apps/leads/results" element={<LeadsPage />} />
 
         {/* טבלת לקוחות קבועה */}
         <Route path="/apps/clients" element={<Placeholder title="טבלת לקוחות" />} />

@@ -18,43 +18,28 @@ export default function BottomNav() {
         zIndex: 50,
       }}
     >
-      {/* חיפוש גוגל */}
-      <button
-        onClick={() => navigate("/google-search")}
-        style={btnStyle}
-      >
+      {/* חיפוש לידים */}
+      <button onClick={() => navigate("/apps/leads")} style={btnStyle}>
         🔍 חיפוש
       </button>
 
       {/* טבלת לקוחות */}
-      <button
-        onClick={() => navigate("/clients")}
-        style={btnStyle}
-      >
+      <button onClick={() => navigate("/apps/clients")} style={btnStyle}>
         📋 לקוחות
       </button>
 
       {/* רשימת מעקב */}
-      <button
-        onClick={() => navigate("/watchlist")}
-        style={btnStyle}
-      >
+      <button onClick={() => navigate("/apps/watchlist")} style={btnStyle}>
         ⭐ מעקב
       </button>
 
-      {/* Google Calendar */}
-      <button
-        onClick={() => navigate("/calendar")}
-        style={btnStyle}
-      >
+      {/* יומן פגישות */}
+      <button onClick={() => navigate("/apps/calendar")} style={btnStyle}>
         📅 יומן
       </button>
 
       {/* חזרה למסך הכניסה */}
-      <button
-        onClick={() => navigate("/apps")}
-        style={btnStyle}
-      >
+      <button onClick={() => navigate("/apps")} style={btnStyle}>
         ↩ חזרה
       </button>
     </nav>

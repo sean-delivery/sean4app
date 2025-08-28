@@ -53,7 +53,7 @@ export default function LeadsPage() {
   };
 
   return (
-    <div style={{ maxWidth: "1100px", margin: "2rem auto", padding: "0 1rem", paddingBottom: "70px" }}>
+    <div style={{ maxWidth: "1100px", margin: "2rem auto", padding: "0 1rem", paddingBottom: "100px" }}>
       <h1 style={{ textAlign: "center", marginBottom: "1rem" }}>
         📈 מציאת לקוחות חדשים
       </h1>
@@ -81,6 +81,11 @@ export default function LeadsPage() {
           📱 ניקוי טלפונים
         </button>
       </div>
+
+      {/* כותרת עליונה לטבלת תוצאות */}
+      <h2 style={{ textAlign: "right", margin: "1rem 0", fontSize: "20px", fontWeight: "bold" }}>
+        📋 תוצאות החיפוש שלך
+      </h2>
 
       {/* טבלה של לידים */}
       <div style={{ overflowX: "auto" }}>

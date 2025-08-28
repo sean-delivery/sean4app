@@ -1,30 +1,61 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { searchLeads, saveLeadsToSupabase } from "../lib/serpApi";
+import BackButton from "../components/BackButton";
+import BottomNav from "../components/BottomNav";
 
 export default function GoogleAPISearch() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   async function handleSearch() {
     if (!query.trim()) return;
     setLoading(true);
     setSaved(false);
+    setError(null);
 
-    const leads = await searchLeads(query);
-    setResults(leads);
-    setLoading(false);
+    try {
+      const leads = await searchLeads(query);
+      setResults(leads);
+    } catch (err) {
+      console.error("❌ שגיאה בחיפוש:", err);
+      setError("אירעה שגיאה בחיפוש. נסה שוב.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function handleSave() {
     if (results.length === 0) return;
-    const { error } = await saveLeadsToSupabase(results);
-    if (!error) setSaved(true);
+    try {
+      const { error } = await saveLeadsToSupabase(results);
+      if (!error) {
+        setSaved(true);
+        // ✅ ניווט למסך תוצאות אחרי שמירה
+        navigate("/apps/leads/results");
+      } else {
+        setError("❌ שגיאה בשמירה ל-Supabase");
+      }
+    } catch (err) {
+      console.error("❌ שגיאה בשמירה:", err);
+      setError("אירעה שגיאה בשמירה");
+    }
   }
 
   return (
-    <div style={{ padding: "20px", maxWidth: "900px", margin: "0 auto" }}>
+    <div
+      style={{
+        padding: "20px",
+        maxWidth: "900px",
+        margin: "0 auto",
+        paddingBottom: "80px", // ✅ כדי שהסרגל לא יסתיר תוכן
+      }}
+    >
       <h2>🔍 מציאת לקוחות חדשים</h2>
       <p>הכנס מילת חיפוש (לדוגמה: עורכי דין תל אביב)</p>
 
@@ -57,6 +88,7 @@ export default function GoogleAPISearch() {
       </div>
 
       {loading && <p>⏳ מחפש לקוחות...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       {results.length > 0 && (
         <>
@@ -91,6 +123,13 @@ export default function GoogleAPISearch() {
           {saved && <p style={{ color: "green" }}>✅ הלידים נשמרו בהצלחה!</p>}
         </>
       )}
+
+      <div style={{ marginTop: "2rem", textAlign: "center" }}>
+        <BackButton />
+      </div>
+
+      {/* ✅ סרגל ניווט תחתון קבוע */}
+      <BottomNav />
     </div>
   );
 }
