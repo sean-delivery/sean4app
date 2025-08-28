@@ -10,9 +10,9 @@ import {
 
 // דפי אפליקציה
 import ChatBot from "./ChatBot";
-import LeadsPage from "./pages/LeadsPage";       // טבלת לידים
-import GoogleAPISearch from "./pages/GoogleAPISearch"; // חיפוש לידים
-
+import LeadsPage from "./pages/LeadsPage";
+import GoogleAPISearch from "./pages/GoogleAPISearch";
+import BottomNav from "./components/BottomNav";
 import "./App.css";
 
 /* ===== Header ===== */
@@ -22,9 +22,7 @@ function Header({ user, onLogout }) {
       <div className="logo">S'ean Apps</div>
       <div>
         {user?.email && <span className="user-email">מחובר כ־ {user.email}</span>}
-        <button onClick={onLogout} className="logout-btn">
-          התנתקות
-        </button>
+        <button onClick={onLogout} className="logout-btn">התנתקות</button>
       </div>
     </header>
   );
@@ -35,21 +33,19 @@ function Footer() {
   return <footer className="footer">© כל הזכויות שמורות לנחמני שון</footer>;
 }
 
-/* ===== Placeholder כללי לשאר האפליקציות ===== */
+/* ===== Placeholder כללי ===== */
 function Placeholder({ title }) {
   const navigate = useNavigate();
   return (
     <div className="placeholder">
       <h2>{title}</h2>
       <p>תוכן יופיע כאן בהמשך...</p>
-      <button onClick={() => navigate("/apps")} className="back-btn">
-        חזרה לאפליקציות
-      </button>
+      <button onClick={() => navigate("/apps")} className="back-btn">חזרה לאפליקציות</button>
     </div>
   );
 }
 
-/* ===== Apps Page ===== */
+/* ===== Apps Page (מסך אפליקציות ראשי) ===== */
 function AppsPage() {
   const navigate = useNavigate();
 
@@ -59,9 +55,12 @@ function AppsPage() {
       <p className="slogan">הדרך שלך לצמיחה מהירה</p>
 
       <div className="apps-grid">
+        {/* זרימת חיפוש לקוחות */}
         <button onClick={() => navigate("/apps/leads")} className="cube">
           📈 מציאת לקוחות חדשים
         </button>
+
+        {/* אפליקציות נוספות */}
         <button onClick={() => navigate("/apps/cashflow")} className="cube">
           💰 תזרים מזומנים + יועץ עסקי AI
         </button>
@@ -146,21 +145,14 @@ export default function App() {
     <Router>
       <Header user={user} onLogout={logout} />
       <Routes>
-        <Route path="/" element={<Navigate to="/apps/leads" />} /> 
+        <Route path="/" element={<Navigate to="/apps" />} />
         <Route path="/apps" element={<AppsPage />} />
 
-        {/* מציאת לקוחות - מסך חיפוש ואח"כ טבלה */}
-        <Route path="/apps/leads" element={<GoogleAPISearch />} />
-        <Route path="/apps/leads/results" element={<LeadsPage />} />
+        {/* חיפוש לקוחות → תמיד ייפתח כאן */}
+        <Route path="/apps/leads" element={<><GoogleAPISearch /><BottomNav /></>} />
 
-        {/* טבלת לקוחות קבועה */}
-        <Route path="/apps/clients" element={<Placeholder title="טבלת לקוחות" />} />
-
-        {/* רשימת מעקב */}
-        <Route path="/apps/watchlist" element={<Placeholder title="רשימת מעקב" />} />
-
-        {/* יומן פגישות */}
-        <Route path="/apps/calendar" element={<Placeholder title="יומן פגישות" />} />
+        {/* טבלת לקוחות שנשמרו */}
+        <Route path="/apps/leads/results" element={<><LeadsPage /><BottomNav /></>} />
 
         {/* שאר האפליקציות */}
         <Route path="/apps/cashflow" element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />} />

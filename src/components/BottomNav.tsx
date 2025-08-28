@@ -10,7 +10,7 @@ export default function BottomNav() {
         bottom: 0,
         left: 0,
         right: 0,
-        background: "#1f2937", // אפור כהה
+        background: "#1f2937",
         display: "flex",
         justifyContent: "space-around",
         alignItems: "center",
@@ -18,30 +18,11 @@ export default function BottomNav() {
         zIndex: 50,
       }}
     >
-      {/* חיפוש לידים */}
-      <button onClick={() => navigate("/apps/leads")} style={btnStyle}>
-        🔍 חיפוש
-      </button>
-
-      {/* טבלת לקוחות */}
-      <button onClick={() => navigate("/apps/clients")} style={btnStyle}>
-        📋 לקוחות
-      </button>
-
-      {/* רשימת מעקב */}
-      <button onClick={() => navigate("/apps/watchlist")} style={btnStyle}>
-        ⭐ מעקב
-      </button>
-
-      {/* יומן פגישות */}
-      <button onClick={() => navigate("/apps/calendar")} style={btnStyle}>
-        📅 יומן
-      </button>
-
-      {/* חזרה למסך הכניסה */}
-      <button onClick={() => navigate("/apps")} style={btnStyle}>
-        ↩ חזרה
-      </button>
+      <button onClick={() => navigate("/apps/leads")} style={btnStyle}>🔍 חיפוש</button>
+      <button onClick={() => navigate("/apps/clients")} style={btnStyle}>📋 לקוחות</button>
+      <button onClick={() => navigate("/apps/watchlist")} style={btnStyle}>⭐ מעקב</button>
+      <button onClick={() => navigate("/apps/calendar")} style={btnStyle}>📅 יומן</button>
+      <button onClick={() => navigate("/apps")} style={btnStyle}>↩ חזרה</button>
     </nav>
   );
 }

@@ -3,6 +3,8 @@ import { getLeads, searchLeads, saveLeadsToSupabase } from "../lib/leadService";
 import BackButton from "../components/BackButton";
 import BottomNav from "../components/BottomNav";
 import PhoneCleanupModal from "../components/leads/PhoneCleanupModal";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 export default function LeadsPage() {
   const [leads, setLeads] = useState<any[]>([]);
@@ -51,6 +53,84 @@ export default function LeadsPage() {
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
     );
   };
+
+  /* ===== ייצוא לאקסל ===== */
+  function exportToExcel() {
+    if (leads.length === 0) {
+      alert("אין נתונים לייצוא");
+      return;
+    }
+
+    // כותרות בארבע שפות
+    const header = [
+      ["שם עסק", "Business Name", "اسم الشركة", "Название бизнеса"],
+      ["טלפון", "Phone", "هاتف", "Телефон"],
+      ["מייל", "Email", "بريد إلكتروني", "Эл. почта"],
+      ["כתובת", "Address", "عنوان", "Адрес"],
+      ["קטגוריה", "Category", "فئة", "Категория"],
+      ["סטטוס", "Status", "الحالة", "Статус"],
+      ["הערות", "Notes", "ملاحظات", "Заметки"],
+      ["תזמון שיחה", "Call Schedule", "جدولة مكالمات", "График звонков"]
+    ];
+
+    // בניית הנתונים
+    const data = leads.map((lead) => [
+      lead.business_name || "",
+      lead.phone || "",
+      lead.email || "",
+      lead.address || "",
+      lead.category || "",
+      lead.status || "",
+      lead.notes || "",
+      lead.callSchedule || ""
+    ]);
+
+    const ws = XLSX.utils.aoa_to_sheet([header.map((h) => h[0]), ...data]); // בעברית ככותרות
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Leads");
+
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    saveAs(new Blob([excelBuffer], { type: "application/octet-stream" }), "leads_backup.xlsx");
+  }
+
+  /* ===== ייבוא מאקסל ===== */
+  function importFromExcel(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = new Uint8Array(e.target?.result as ArrayBuffer);
+      const workbook = XLSX.read(data, { type: "array" });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const importedData: any[] = XLSX.utils.sheet_to_json(sheet);
+
+      // מניעת כפילויות לפי שם עסק + טלפון
+      const newLeads = importedData
+        .filter(
+          (row: any) =>
+            !leads.some(
+              (lead) =>
+                lead.business_name === row["שם עסק"] &&
+                lead.phone === row["טלפון"]
+            )
+        )
+        .map((row) => ({
+          business_name: row["שם עסק"] || "",
+          phone: row["טלפון"] || "",
+          email: row["מייל"] || "",
+          address: row["כתובת"] || "",
+          category: row["קטגוריה"] || "",
+          status: row["סטטוס"] || "חדש",
+          notes: row["הערות"] || "",
+          callSchedule: row["תזמון שיחה"] || ""
+        }));
+
+      setLeads((prev) => [...prev, ...newLeads]);
+      alert(`✅ נוספו ${newLeads.length} לידים חדשים מהקובץ`);
+    };
+    reader.readAsArrayBuffer(file);
+  }
 
   return (
     <div style={{ maxWidth: "1100px", margin: "2rem auto", padding: "0 1rem", paddingBottom: "100px" }}>
@@ -188,6 +268,28 @@ export default function LeadsPage() {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* כפתורי ייבוא/ייצוא */}
+      <div style={{ marginTop: "20px", display: "flex", gap: "10px", justifyContent: "center" }}>
+        <button
+          onClick={exportToExcel}
+          style={{ padding: "10px 20px", background: "#10b981", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}
+        >
+          ⬇️ יצוא לאקסל
+        </button>
+
+        <label
+          style={{ padding: "10px 20px", background: "#3b82f6", color: "white", borderRadius: "6px", cursor: "pointer" }}
+        >
+          ⬆️ יבוא מאקסל
+          <input
+            type="file"
+            accept=".xlsx, .xls"
+            style={{ display: "none" }}
+            onChange={importFromExcel}
+          />
+        </label>
       </div>
 
       {/* מודאל לניקוי טלפונים */}
