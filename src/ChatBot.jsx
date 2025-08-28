@@ -1,8 +1,9 @@
+import BackButton from "./components/BackButton";
 import { useState } from "react";
 
 export default function ChatBot() {
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "שלום 👋 אני הבוט של S'ean Apps. איך אפשר לעזור לך היום?" },
+    { role: "assistant", content: "שלום 👋 אני מיכל העוזרת האישית. איך אפשר לעזור לך היום?" },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -128,21 +129,25 @@ export default function ChatBot() {
           }}
           placeholder="כתוב הודעה..."
         />
-        <button
-          onClick={sendMessage}
-          style={{
-            marginLeft: "10px",
-            padding: "10px 20px",
-            background: "#2563eb",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
-        >
-          שלח
-        </button>
-      </div>
-    </div>
-  );
+ <button
+  onClick={sendMessage}
+  style={{
+    marginLeft: "10px",
+    padding: "10px 20px",
+    background: "#2563eb",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+  }}
+>
+  שלח
+</button>
+
+{/* כאן הכפתור חזרה למסך הראשי */}
+<BackButton />
+
+</div>
+</div>
+);
 }

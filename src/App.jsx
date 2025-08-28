@@ -7,10 +7,14 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
+
+// דפי אפליקציה
 import ChatBot from "./ChatBot";
-import LeadsPage from "./pages/LeadsPage"; // ⬅️ הוסף למעלה
-import GoogleAPISearch from "./pages/GoogleAPISearch"; // ✅ חיבור חדש
+import LeadsPage from "./pages/LeadsPage";
+import GoogleAPISearch from "./pages/GoogleAPISearch"; // אם תרצה מסך חיפוש עצמאי
+
 import "./App.css";
+
 
 /* ===== Header ===== */
 function Header({ user, onLogout }) {
@@ -100,8 +104,7 @@ export default function App() {
   async function loginWithGoogle() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: import.meta.env.VITE_FRONTEND_URL }
-
+      options: { redirectTo: import.meta.env.VITE_FRONTEND_URL },
     });
     if (error) alert(error.message);
   }
@@ -143,19 +146,29 @@ export default function App() {
   return (
     <Router>
       <Header user={user} onLogout={logout} />
-<Routes>
-  <Route path="/" element={<Navigate to="/apps" />} />
-  <Route path="/apps" element={<AppsPage />} />
+      <Routes>
+        <Route path="/" element={<Navigate to="/apps" />} />
+        <Route path="/apps" element={<AppsPage />} />
 
-  {/* כאן השינוי */}
-  <Route path="/apps/leads" element={<GoogleAPISearch />} />
+        {/* מציאת לקוחות - עם הטבלאות וה־BottomNav */}
+        <Route path="/apps/leads" element={<LeadsPage />} />
 
-  <Route path="/apps/cashflow" element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />} />
-  <Route path="/apps/warehouse" element={<Placeholder title="ניהול מחסן אישי" />} />
-  <Route path="/apps/marketing" element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />} />
-  <Route path="/apps/support" element={<Placeholder title="תמיכה והתקשרות" />} />
-  <Route path="/apps/chatbot" element={<ChatBot />} />
-</Routes>
+        {/* טבלת לקוחות קבועה */}
+        <Route path="/apps/clients" element={<Placeholder title="טבלת לקוחות" />} />
+
+        {/* רשימת מעקב */}
+        <Route path="/apps/watchlist" element={<Placeholder title="רשימת מעקב" />} />
+
+        {/* יומן פגישות */}
+        <Route path="/apps/calendar" element={<Placeholder title="יומן פגישות" />} />
+
+        {/* שאר האפליקציות */}
+        <Route path="/apps/cashflow" element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />} />
+        <Route path="/apps/warehouse" element={<Placeholder title="ניהול מחסן אישי" />} />
+        <Route path="/apps/marketing" element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />} />
+        <Route path="/apps/support" element={<Placeholder title="תמיכה והתקשרות" />} />
+        <Route path="/apps/chatbot" element={<ChatBot />} />
+      </Routes>
       <Footer />
     </Router>
   );
