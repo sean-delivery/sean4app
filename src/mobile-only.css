@@ -1,0 +1,107 @@
+/* מובייל בלבד */
+@media (max-width: 768px) {
+
+  :root{
+    --mobile-nav-height: clamp(52px, 7vh, 64px);
+    --mobile-gap: 14px;
+  }
+
+  /* לא נוגעים בדסקטופ; במובייל מוסיפים מרווח לסרגל */
+  body, #root, .app, main {
+    padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+    background: #f8fafc;
+  }
+
+  /* ===== רשת של "קוביות" בדף הראשי =====
+     בוחר קונטיינר נפוץ (קח את מה שמתאים אצלך: .apps-grid/.cards/.tiles/role=list)
+     אם קיימים כמה — כולם יקבלו רשת דו-עמודתית במובייל.
+  */
+  .apps-grid,
+  .cards,
+  .tiles,
+  .home .grid,
+  .home [role="list"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--mobile-gap);
+    padding: var(--mobile-gap);
+  }
+
+  /* האייטמים עצמם (כפתורי "קוביה") */
+  .apps-grid > *,
+  .cards > *,
+  .tiles > *,
+  .home .grid > *,
+  .home [role="list"] > * {
+    border-radius: 18px;
+    aspect-ratio: 1 / 1;        /* קוביות ריבועיות יפות */
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* טקסט בכרטיסים שלא יקפוץ */
+  .apps-grid > * * ,
+  .cards > * * ,
+  .tiles > * *  {
+    font-size: clamp(16px, 4.5vw, 22px);
+    line-height: 1.2;
+  }
+
+  /* ===== סרגל תחתון מקובע וקבוע-גודל ===== */
+  footer,
+  .footer,
+  .bottom-nav,
+  nav.bottom,
+  [data-role="bottom-nav"] {
+    position: fixed !important;
+    left: 0; right: 0; bottom: 0;
+    height: var(--mobile-nav-height);
+    padding: 0 10px env(safe-area-inset-bottom);
+    display: flex; gap: 6px;
+    align-items: center; justify-content: space-around;
+    background: #0f172a;
+    border-top: 1px solid #1f2937;
+    z-index: 9999;
+  }
+  footer a, footer button,
+  .footer a, .footer button,
+  .bottom-nav a, .bottom-nav button,
+  nav.bottom a, nav.bottom button {
+    min-width: 64px; min-height: 44px;   /* נגישות */
+    font-size: 12px; line-height: 1.1;
+    border-radius: 10px; padding: 6px 8px;
+  }
+
+  /* מונע זום על פוקוס בשדות במובייל */
+  input, select, textarea { font-size: 16px; }
+}
+/* סוף מובייל */
+/* שינוי רשת קוביות אנכית במובייל */
+.apps-grid,
+.cards,
+.tiles,
+.home .grid,
+.home [role="list"] {
+  display: grid !important;
+  grid-template-columns: 1fr; /* סידור אנכי */
+  gap: var(--mobile-gap);
+  padding: var(--mobile-gap);
+}
+
+/* שינוי בגודל הקוביות לאנכיות */
+.apps-grid > *,
+.cards > *,
+.tiles > *,
+.home .grid > *,
+.home [role="list"] > * {
+  border-radius: 18px;
+  aspect-ratio: 1 / 1;  /* קוביות ריבועיות, לא משנה איך זה ייראה */
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
