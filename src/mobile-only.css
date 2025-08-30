@@ -105,3 +105,36 @@
   justify-content: center;
   text-align: center;
 }
+/* --- mobile tweak: apps grid full-width, centered, single column --- */
+@media (max-width: 768px) {
+  html, body { overflow-x: hidden; }                 /* לא “נאכל” צד שמאל */
+  .apps-container { padding-inline: 16px; }
+
+  .apps-grid,
+  .cards,
+  .tiles,
+  .home .grid,
+  .home [role="list"] {
+    display: grid !important;
+    grid-template-columns: 1fr;                      /* טור יחיד – אנכי */
+    gap: var(--mobile-gap);
+    width: 100%;
+    max-width: 520px;                                /* רוחב נוח למובייל */
+    margin-inline: auto;                             /* מירכוז הגריד */
+    box-sizing: border-box;
+  }
+
+  .apps-grid > *,
+  .cards > *,
+  .tiles > *,
+  .home .grid > *,
+  .home [role="list"] > * {
+    width: 100%;
+    border-radius: 18px;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
