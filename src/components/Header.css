@@ -1,0 +1,55 @@
+.header {
+  width: 100%;
+  background-color: #374151; /* אפור כהה כמו התחתון */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header-left {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.header-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.header button {
+  background: #ef4444; /* אדום להתנתקות */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.header .gift-btn {
+  background: #10b981; /* ירוק לכפתור מתנה */
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .header-left {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

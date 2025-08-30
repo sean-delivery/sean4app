@@ -1,0 +1,182 @@
+// src/App.tsx
+import "./styles/mobile-polish.css";
+import { useEffect, useState } from "react";
+import { supabase } from "./supabaseClient";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
+
+// דפי אפליקציה
+import ChatBot from "./ChatBot";
+import LeadsPage from "./pages/LeadsPage";
+import GoogleAPISearch from "./pages/GoogleAPISearch";
+import TrackingPage from "./pages/TrackingPage";
+import FavoritesPage from "./pages/FavoritesPage";   // פייבוריטים (מעקב אישי)
+import CalendarPage from "./pages/CalendarManager";  // לוח שנה
+
+import BottomNav from "./components/BottomNav";
+import "./App.css";
+
+/* ===== Header ===== */
+function Header({ user, onLogout }) {
+  return (
+    <header className="header" data-role="app-header">
+      <div className="logo">S'ean Apps</div>
+      <div>
+        {user?.email && <span className="user-email">מחובר כ־ {user.email}</span>}
+        <button onClick={onLogout} className="logout-btn">התנתקות</button>
+      </div>
+    </header>
+  );
+}
+
+/* ===== Footer ===== */
+function Footer() {
+  return <footer className="footer" data-role="app-footer">© כל הזכויות שמורות לנחמני שון</footer>;
+}
+
+/* ===== Placeholder כללי ===== */
+function Placeholder({ title }) {
+  const navigate = useNavigate();
+  return (
+    <div className="placeholder">
+      <h2>{title}</h2>
+      <p>תוכן יופיע כאן בהמשך...</p>
+      <button onClick={() => navigate("/apps")} className="back-btn">
+        חזרה לאפליקציות
+      </button>
+    </div>
+  );
+}
+
+/* ===== Apps Page (מסך אפליקציות ראשי) ===== */
+function AppsPage() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="apps-container">
+      <h1 data-role="hero-title">עכשיו אני מתחיל לייצר כסף 🚀</h1>
+      <p className="slogan" data-role="hero-sub">הדרך שלך לצמיחה מהירה</p>
+
+      <div className="apps-grid" data-role="app-grid">
+        {/* זרימת חיפוש לקוחות */}
+        <button onClick={() => navigate("/apps/leads")} className="cube" data-role="app-card">
+          📈 מציאת לקוחות חדשים
+        </button>
+
+        {/* אפליקציות נוספות */}
+        <button onClick={() => navigate("/apps/cashflow")} className="cube" data-role="app-card">
+          💰 תזרים מזומנים + יועץ עסקי AI
+        </button>
+        <button onClick={() => navigate("/apps/warehouse")} className="cube" data-role="app-card">
+          📦 ניהול מחסן אישי
+        </button>
+        <button onClick={() => navigate("/apps/marketing")} className="cube" data-role="app-card">
+          📢 שיווק חכם + יועץ שיווקי AI
+        </button>
+        <button onClick={() => navigate("/apps/support")} className="cube-blue" data-role="app-card" data-variant="primary">
+          📞 תמיכה והתקשרות
+        </button>
+        <button
+          onClick={() => window.open("https://wa.me/972586177022", "_blank")}
+          className="cube-blue" data-role="app-card" data-variant="primary"
+        >
+          🚚 מחשבון משלוחים והובלות לכל הארץ
+        </button>
+        <button onClick={() => navigate("/apps/chatbot")} className="cube" data-role="app-card">
+          🤖 בוט שירות לקוחות
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ===== App Component ===== */
+export default function App() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+      setLoading(false);
+    });
+  }, []);
+
+  async function loginWithGoogle() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: import.meta.env.VITE_FRONTEND_URL },
+    });
+    if (error) alert(error.message);
+  }
+
+  async function loginWithEmail() {
+    const email = prompt("הכנס אימייל:");
+    const password = prompt("הכנס סיסמה:");
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) alert(error.message);
+    else setUser(data.user);
+  }
+
+  function logout() {
+    supabase.auth.signOut();
+    setUser(null);
+  }
+
+  if (loading) return <p className="loading">טוען...</p>;
+
+  if (!user) {
+    return (
+      <div className="login-screen">
+        <h1>S'ean Apps</h1>
+        <p>כדי להמשיך – התחבר עכשיו</p>
+        <button onClick={loginWithGoogle} className="google-btn">
+          התחברות עם Google
+        </button>
+        <button onClick={loginWithEmail} className="email-btn">
+          הרשמה / כניסה ידנית
+        </button>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <Router>
+      <Header user={user} onLogout={logout} />
+      <Routes>
+        <Route path="/" element={<Navigate to="/apps" />} />
+        <Route path="/apps" element={<AppsPage />} />
+
+        {/* חיפוש לקוחות */}
+        <Route path="/apps/leads" element={<><GoogleAPISearch /><BottomNav /></>} />
+        <Route path="/apps/leads/results" element={<><LeadsPage /><BottomNav /></>} />
+
+        {/* מעקב (פייבוריט) */}
+        <Route path="/apps/favorites" element={<><FavoritesPage /><BottomNav /></>} />
+
+        {/* מעקב חיפושים */}
+        <Route path="/apps/tracking" element={<><TrackingPage /><BottomNav /></>} />
+
+        {/* לוח שנה */}
+        <Route path="/apps/calendar" element={<><CalendarPage /><BottomNav /></>} />
+
+        {/* אפליקציות נוספות */}
+        <Route path="/apps/cashflow" element={<Placeholder title="תזרים מזומנים + יועץ עסקי AI" />} />
+        <Route path="/apps/warehouse" element={<Placeholder title="ניהול מחסן אישי" />} />
+        <Route path="/apps/marketing" element={<Placeholder title="שיווק חכם + יועץ שיווקי AI" />} />
+        <Route path="/apps/support" element={<Placeholder title="תמיכה והתקשרות" />} />
+        <Route path="/apps/chatbot" element={<ChatBot />} />
+      </Routes>
+      <Footer />
+    </Router>
+  );
+}

@@ -1,0 +1,37 @@
+@media (max-width: 768px) {
+  :root{ --mobile-nav-height: 64px; --mobile-gap: 14px; }
+
+  /* שומר מקום לסרגל בכל הדפים שאינם דף הבית (הסרגל עצמו מוסתר שם לוגית) */
+  html, body, #root, .app, main {
+    padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+  }
+
+  /* רשת 8 קוביות */
+  .home-tiles{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mobile-gap);
+    padding: var(--mobile-gap);
+  }
+
+  .home-tiles > *{
+    border-radius: 18px; aspect-ratio: 1/1; min-height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+
+  /* הסרגל התחתון (כשמוצג) */
+  .app-bottom-nav{
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: var(--mobile-nav-height);
+    display: flex; align-items: center; justify-content: space-around;
+    background: #0f172a; border-top: 1px solid #1f2937;
+    z-index: 2147483000; transform: translateZ(0);
+  }
+
+  .app-bottom-nav a{
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    min-width:64px; min-height:44px; padding:6px 8px;
+    color:#e5e7eb; text-decoration:none;
+  }
+}

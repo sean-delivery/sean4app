@@ -1,0 +1,6 @@
+@media (min-width: 769px) {
+  :root { --desktop-topbar: 60px; } /* עדכן אם הפס העליון גבוה/נמוך יותר */
+  .app-shell main, main {
+    padding-top: calc(var(--desktop-topbar) + 12px);
+  }
+}

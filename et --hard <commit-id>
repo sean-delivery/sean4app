@@ -1,0 +1,323 @@
+[33mcommit eb104c3ae5142443a200323e21701ed01457e1c1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mui/mobile-polish[m[33m)[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Sat Aug 30 09:09:57 2025 +0000
+
+    fix: restore table button interactions (stop bubbling, set type=button)
+
+[33mcommit e261a73c8475abc43fd3b7ac7714cf47cafb8c6a[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Sat Aug 30 09:02:49 2025 +0000
+
+    ui: restore full clickability under fixed header; ensure buttons receive pointer events
+
+[33mcommit e63b4489171c2acb8273ea96d475e9d2f67b9df3[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Sat Aug 30 08:22:36 2025 +0000
+
+    ui: fix top header full width + keep spacing for title under bar
+
+[33mcommit 4bc74f7e03cdc739cee27ade82de9ffd56311dc0[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Sat Aug 30 08:14:26 2025 +0000
+
+    ui: add global header offset + restore clickability under sticky header
+
+[33mcommit 8a84d650f490b7844a2ad967405d374242e14a84[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Sat Aug 30 07:48:10 2025 +0000
+
+    ui: fine-tune header position (reduce top padding, set fixed height)
+
+[33mcommit d51a96001d943461f568257f88a124a909bb1c1f[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Sat Aug 30 07:39:14 2025 +0000
+
+    ui: wire data-role hooks and enable mobile polish (non-breaking)
+
+[33mcommit 473af861935a22ffb4bd0063cf0a28ae3cf3783f[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Sat Aug 30 07:35:06 2025 +0000
+
+    ui: add non-intrusive mobile polish CSS (data-role scoped)
+
+[33mcommit d970f12e7bfba15074bba35462ab20f16dcf0c70[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Fri Aug 29 20:31:07 2025 +0000
+
+    fix: קיבוע Header ותחתון, הסרת ריבוע שקוף, סידור מבנה אחיד
+
+[33mcommit 2b557d95974899dce741b62abebfdef4f1f86076[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Thu Aug 28 21:57:54 2025 +0000
+
+    fix: unify Lead type and cleanup errors
+
+[33mcommit c831d6c9db338a781fb244ad22690a7bededf9e0[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Thu Aug 28 16:29:11 2025 +0000
+
+    הוספת יצוא/יבוא אקסל עם מחיקת כפילויות בטבלת לקוחות
+
+[33mcommit a584bfd2e39b008e2cb12eabc5cadf49879fc663[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Thu Aug 28 15:40:38 2025 +0000
+
+    update
+
+[33mcommit ba2971069a343ae93194582520f42cc9325e1fd2[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Thu Aug 28 15:09:36 2025 +0000
+
+    עדכון LeadsPage + PhoneCleanupModal + BottomNav
+
+[33mcommit e57045ef84e10879ba54760227e4d04f98ca8677[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 23:45:41 2025 +0000
+
+    🚀 full update + build
+
+[33mcommit 1c8e36b5c6e356e43037f1368f2ba0c2c10c67b2[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 23:25:17 2025 +0000
+
+    Add googlesearch
+
+[33mcommit 1392b21aec9da0f6183dd34f954e7e3d2cd72f16[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 22:40:09 2025 +0000
+
+    Add googlesearch
+
+[33mcommit 9e146e6965758af1b5fce61333da9260e558be32[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 22:24:24 2025 +0000
+
+    Add googlesearch
+
+[33mcommit 32a7ff8963c90715a847718b277d36e262a9cc53[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 21:11:24 2025 +0000
+
+    Add chatbot with system prompt
+
+[33mcommit fd60868e968af55761b77c475393d8b3616f5f06[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 20:54:56 2025 +0000
+
+    trigger netlify rebuild
+
+[33mcommit f0eaf99e19e099d1ceb136142c9aca6018c189fe[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 20:51:38 2025 +0000
+
+    update chatbot with OpenAI key
+
+[33mcommit 204b62ba2515863fffe4d90e5ee11b34d1f577ab[m[33m ([m[1;31morigin/chatbot-update[m[33m, [m[1;32mchatbot-update[m[33m)[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 19:41:46 2025 +0000
+
+    Trigger Netlify rebuild
+
+[33mcommit 99e05f197bb1dd9879b52ea90103e103ee94e9af[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 19:33:32 2025 +0000
+
+    update gitignore
+
+[33mcommit 7e28bcdb439f87218c4a37c32295a299ca433061[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 18:59:38 2025 +0000
+
+    add ChatBot.jsx and update App.jsx with new chatbot route
+
+[33mcommit e554ac06fbe89c40cc7d9d4538a9f39ace45568a[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 18:33:41 2025 +0000
+
+    Update App.jsx and App.css - UI centered, hover effects, new slogan
+
+[33mcommit 989b4d740d97bfd5619c60b822432693cfae53bf[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 18:24:45 2025 +0000
+
+    fix: add redirectUrl handling
+
+[33mcommit 1c4fa11f09f01bbc9dccca854247450ac6847331[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 18:19:26 2025 +0000
+
+    fix: add redirectUrl handling
+
+[33mcommit 2793820c50d7464821c612009b7d0a79077b171d[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 17:48:05 2025 +0000
+
+    fix: supabase import path working on netlify
+
+[33mcommit d179ef41987a3bcb688d014b23657127419fe437[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 17:40:46 2025 +0000
+
+    fix supabase import
+
+[33mcommit fb18af7834e837a6a7ab3c0101f559b7c465288e[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 17:26:07 2025 +0000
+
+    fix supabase client import
+
+[33mcommit b31118072cb8ab6b3c6147721ab9f63fe2cb81e0[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 17:22:41 2025 +0000
+
+    fix supabase import
+
+[33mcommit eb08b4ae74608ba53c9eb1a243c3c8a2408f08e2[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 17:15:45 2025 +0000
+
+    fix supabase env
+
+[33mcommit 8ba3d545b6512d4013bf42f255468fc92a7814e5[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 17:00:35 2025 +0000
+
+    rollback supabaseClient clean
+
+[33mcommit c601d32a78a06c742928c2cdf445096012b3431a[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 16:59:04 2025 +0000
+
+    rollback supabaseClient clean
+
+[33mcommit 7a2c7a407697ca6a6bdad06baa3ba388abdf3827[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 16:46:53 2025 +0000
+
+    update App.jsx with centered apps grid and new design
+
+[33mcommit 683be4bb3515f4cb0847c9340ac511d64bffa8da[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 16:43:08 2025 +0000
+
+    update App.jsx with centered apps grid and new design
+
+[33mcommit ebf6e256c65b14dc38c186a14c4443b56ebda739[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 16:39:55 2025 +0000
+
+    trigger Netlify build
+
+[33mcommit c52a1025a6d045a4a0f81388f244e75fd368ef47[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 16:23:49 2025 +0000
+
+    trigger Netlify build
+
+[33mcommit a44bbbcebf432da468fc10aa8fc54859228e2e16[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 16:22:47 2025 +0000
+
+    install react-router-dom
+
+[33mcommit cd73cb049fd77013eef87dccb0240272e548c63d[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 16:21:28 2025 +0000
+
+    update app with multi screens and router
+
+[33mcommit 04d94bf36600e71a51e53ca5ce962020f491c604[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 15:07:48 2025 +0000
+
+    UI centered + responsive + footer
+
+[33mcommit 7d84fa8ca9f833de481734cbd0dc70d066d3457b[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 15:00:42 2025 +0000
+
+    UI centered + responsive + footer
+
+[33mcommit 983dabbf643e5ef7e438f172e479343d8df92dee[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 14:56:52 2025 +0000
+
+    UI centered + responsive + footer
+
+[33mcommit 938483bf0aea1de8a441ac90ea6a47f4ca56c7c0[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 14:52:46 2025 +0000
+
+    UI centered + responsive + footer
+
+[33mcommit fb3ac8d45a3b03f18eea2415f5a957d9a9b92371[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 14:49:34 2025 +0000
+
+    UI centered + responsive + footer
+
+[33mcommit c8bb7ee87956791f8e5e91ab0d732f65c857f14b[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 14:37:04 2025 +0000
+
+    update styles and design
+
+[33mcommit 8ba86a4315f5827b369eafca812a1e27dd4cb46a[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 14:33:05 2025 +0000
+
+    update styles and design
+
+[33mcommit 93f3bdeb526d1b39c51627034d67da2fed0af2ab[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 14:10:00 2025 +0000
+
+    fix: add supabase client properly
+
+[33mcommit c3d1e5e9f698252a6464d4712b20623640b553e0[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 14:05:04 2025 +0000
+
+    fix: add supabase and externalize for vite
+
+[33mcommit e6180c3e426eb3bd51dfe9e4e0b7f82c093c3535[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 13:59:02 2025 +0000
+
+    fix netlify publish path
+
+[33mcommit 83f18e86503343b6008bba0f3a102ff829018055[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 13:50:40 2025 +0000
+
+    add supabase auth with vite
+
+[33mcommit 98ca5e76d87c3430360122b6598785ed2a486b11[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 12:58:29 2025 +0000
+
+    Add index.html
+
+[33mcommit 1c3b16404f1441508a05cfa8702ddd572854dd58[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 12:50:39 2025 +0000
+
+    Add index.html
+
+[33mcommit 492d083b0186c56d5fd107208948328aa8c4ed08[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 12:36:40 2025 +0000
+
+    Add index.html as entry point
+
+[33mcommit c7adcd6f7722d44db44e272c1a3239ec26318833[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 12:33:19 2025 +0000
+
+    Add index.html as entry point
+
+[33mcommit f8cd9a0975f297f39dbc4550e8aa0f69417a67e8[m
+Author: sean4app <seannon29@gmail.com>
+Date:   Wed Aug 27 14:54:31 2025 +0300
+
+    Initial commit

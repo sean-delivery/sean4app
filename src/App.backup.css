@@ -1,0 +1,171 @@
+/* עיצוב בסיסי */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* התאמה לסרגלים */
+header, footer {
+  font-size: 16px;
+}
+
+/* התאמות לניידים */
+@media (max-width: 768px) {
+  header, footer {
+    height: 60px;
+    font-size: 18px;
+    padding: 0 1rem;
+  }
+
+  h1 {
+    font-size: 20px !important;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 18px !important;
+    text-align: center;
+  }
+
+  button, a {
+    font-size: 16px !important;
+    padding: 12px 16px !important;
+  }
+
+  table {
+    font-size: 14px !important;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* תפריט תחתון מותאם נייד */
+  .bottom-nav {
+    height: 60px;
+    font-size: 16px;
+  }
+}
+
+/* התאמות למסכים קטנים מאוד */
+@media (max-width: 480px) {
+  header, footer {
+    height: 55px;
+    font-size: 16px;
+  }
+
+  h1, h2 {
+    font-size: 18px !important;
+  }
+
+  button, a {
+    font-size: 15px !important;
+    padding: 10px 14px !important;
+  }
+
+  table {
+    font-size: 13px !important;
+  }
+
+  .bottom-nav {
+    height: 55px;
+    font-size: 15px;
+  }
+}
+
+/* ✅ מרכז את כל העמודים */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* מרכז אנכית */
+  align-items: center;      /* מרכז אופקית */
+  min-height: calc(100vh - 100px); /* גובה מלא מינוס פס עליון ותחתון */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+/* ====== עיצוב קוביות אפליקציה ====== */
+.apps-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.apps-grid button.cube,
+.apps-grid button.cube-blue {
+  width: 90%;
+  max-width: 320px;
+  padding: 16px 20px;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease-in-out;
+}
+
+.apps-grid button.cube:hover,
+.apps-grid button.cube-blue:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ====== עיצוב קוביות אפליקציה ====== */
+.apps-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.apps-grid button.cube,
+.apps-grid button.cube-blue {
+  width: 90%;
+  max-width: 320px;
+  padding: 16px 20px;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease-in-out;
+}
+
+.apps-grid button.cube:hover,
+.apps-grid button.cube-blue:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ מרכז את כל העמודים */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* מרכז אנכית */
+  align-items: center;      /* מרכז אופקית */
+  min-height: calc(100vh - 100px); /* גובה מלא מינוס פס עליון ותחתון */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+/* ✅ הצללה עדינה לכפתורים וקוביות */
+button, .card, .menu-item {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ✅ אפקט בלחיצה */
+button:hover, .card:hover, .menu-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
