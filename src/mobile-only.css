@@ -1,5 +1,6 @@
 /* מובייל בלבד */
 @media (max-width: 768px) {
+
   :root {
     --mobile-nav-height: clamp(52px, 7vh, 64px);
     --mobile-gap: 14px;
@@ -22,6 +23,10 @@
     gap: var(--mobile-gap);
     padding: var(--mobile-gap);
     justify-items: center; /* מירכוז הקוביות */
+    width: 100%;
+    max-width: 520px; /* רוחב נוח למובייל */
+    margin-inline: auto; /* מירכוז הגריד */
+    box-sizing: border-box;
   }
 
   /* האייטמים עצמם (כפתורי "קוביה") */
@@ -88,3 +93,54 @@
 }
 
 /* סוף מובייל */
+/* ---- harden mobile layout: stop horizontal overflow & center content ---- */
+@media (max-width: 768px) {
+  html, body { overflow-x: hidden; }
+
+  /* קונטיינר המסך של דף הקוביות */
+  .apps-container {
+    width: 100%;
+    max-width: 560px;            /* רוחב נוח למובייל */
+    margin-inline: auto;         /* מירכוז */
+    padding-inline: 16px;        /* שוליים פנימיים */
+    box-sizing: border-box;
+  }
+
+  /* כותרת ראשית – שלא "תברח" לצדדים */
+  [data-role="hero-title"] {
+    font-size: clamp(28px, 9vw, 44px);
+    line-height: 1.15;
+    margin-inline: 0;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  [data-role="hero-sub"] { margin: 8px 0 16px; }
+
+  /* רשת קוביות – טור יחיד ממורכז, בלי גלילה אופקית */
+  .apps-grid,
+  .cards,
+  .tiles,
+  .home .grid,
+  .home [role="list"] {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    width: 100%;
+    margin-inline: auto;
+    box-sizing: border-box;
+  }
+  .apps-grid > *,
+  .cards > *,
+  .tiles > *,
+  .home .grid > *,
+  .home [role="list"] > * {
+    width: 100%;
+  }
+
+  /* אלמנטים שעלולים לשבור רוחב */
+  img, svg, canvas, video { max-width: 100%; height: auto; }
+  header, .header, footer, .footer { max-width: 100%; }
+
+  /* הגנה כללית – מדדים יחסית לקונטיינר */
+  *, *::before, *::after { box-sizing: border-box; }
+}
